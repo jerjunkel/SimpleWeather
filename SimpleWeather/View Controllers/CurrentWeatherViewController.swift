@@ -1,0 +1,179 @@
+//
+//  CurrentWeatherViewController.swift
+//  SimpleWeather
+//
+//  Created by Jermaine Kelly on 8/11/18.
+//  Copyright © 2018 Jermaine Kelly. All rights reserved.
+//
+
+import UIKit
+
+protocol CurrentWeatherVCDelagate: class {
+    //func updateChild(with: WeatherViewModel, city: RawForecast.City)
+    func updateChild(forecast: Forecast)
+}
+
+class CurrentWeatherViewController: UIViewController {
+    private var forecast: Forecast?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupViewController()
+    }
+    
+    //MARK: - Utilities
+    private func setupViewController() {
+        view.backgroundColor = .clear
+        addSubviews()
+        setContraints()
+    }
+    
+    private func addSubviews() {
+        view.addSubview(dateAndTimeLabel)
+        view.addSubview(locationLabel)
+        view.addSubview(temperatureLabel)
+        view.addSubview(weatherConditionImageView)
+        view.addSubview(weatherStack)
+    }
+    
+    private func setContraints() {
+        NSLayoutConstraint.activate([
+            dateAndTimeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            dateAndTimeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50)
+            ])
+        
+        NSLayoutConstraint.activate([
+            locationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            locationLabel.topAnchor.constraint(equalTo: dateAndTimeLabel.bottomAnchor)
+            ])
+        
+        NSLayoutConstraint.activate([
+            weatherConditionImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            weatherConditionImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -70),
+            weatherConditionImageView.heightAnchor.constraint(equalToConstant: 200),
+            weatherConditionImageView.widthAnchor.constraint(equalToConstant: 200)
+            ])
+        
+        NSLayoutConstraint.activate([
+            temperatureLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            temperatureLabel.topAnchor.constraint(equalTo: weatherConditionImageView.bottomAnchor, constant: 30)
+            ])
+        
+        NSLayoutConstraint.activate([
+            weatherStack.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 40),
+            weatherStack.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            ])
+        //          weatherStack.center = view.center
+    }
+    
+    private func updateCurrentWeatherInterface() {
+        guard let forecast = forecast else { return }
+        guard let viewModel = forecast.weatherModels.first else { return }
+        
+        DispatchQueue.main.async {
+            self.temperatureLabel.text = viewModel.currentTempFahrenheitString
+            self.dateAndTimeLabel.text = viewModel.dateFormatted
+            self.locationLabel.text = forecast.city?.name
+        }
+    }
+    
+    private func updateFutureForecastStack() {
+        DispatchQueue.main.async {
+            let weatherModels = self.forecast!.weatherModels
+            let stackViews = self.weatherStack.arrangedSubviews.map { $0 as! LabeledWeatherView }
+            
+            for i in 0..<stackViews.count {
+                print(weatherModels[i].dateFormatted)
+                stackViews[i].titleLabel.text = weatherModels[i].time
+            }
+            
+//            self.weatherStack.arrangedSubviews.forEach { view  in
+//                let weatherView = view as! LabeledWeatherView
+//                weatherView.titleLabel.text = "Test"
+//            }
+        }
+    }
+    
+    //MARK: - Properties
+    private var dateAndTimeLabel: UILabel = {
+        let label = UILabel()
+        label.setAutoresizingMaskToFalse()
+        label.text = "Dec 10th, 2017 -9:32 a.m"
+        label.numberOfLines = 1
+        label.textColor = App.Color.white.color
+        return label
+    }()
+    
+    private var locationLabel: UILabel = {
+        let label = UILabel()
+        label.setAutoresizingMaskToFalse()
+        label.text = "Location"
+        label.numberOfLines = 2
+        label.textColor = App.Color.white.color
+        label.font = UIFont.boldSystemFont(ofSize: 50)
+        return label
+    }()
+    
+    private var temperatureLabel: UILabel = {
+        let label = UILabel()
+        label.setAutoresizingMaskToFalse()
+        //label.text = "13°C"
+        label.numberOfLines = 1
+        label.textColor = App.Color.white.color
+        label.font = UIFont.boldSystemFont(ofSize: 50)
+        return label
+    }()
+    
+    private var weatherConditionImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.setAutoresizingMaskToFalse()
+        imageView.backgroundColor = .red
+        return imageView
+    }()
+    
+    private var weatherStack: UIStackView = {
+        
+        let testViews = ["mon","tue","wed","thur","fri"].map({ (day) -> LabeledWeatherView in
+            let weatherImage = LabeledWeatherView(day.capitalized, condition: .clear)
+            return weatherImage
+        })
+        
+        let stack = UIStackView(arrangedSubviews: testViews)
+        stack.setAutoresizingMaskToFalse()
+        stack.spacing = 10
+        stack.distribution = .fillEqually
+        
+        return stack
+        
+    }()
+    
+    //    private var weatherStack: WeatherStack = {
+    //        let testViews = ["mon","tue","wed","thur","fri"].map({ (day) -> LabledWeatherView in
+    //            let weatherImage = LabledWeatherView(day, condition: .clear)
+    //            return weatherImage
+    //        })
+    //
+    //        let stack = WeatherStack(view: testViews)
+    //        stack.setAutoresizngMaskToFalse()
+    //        return stack
+    //    }()
+}
+
+//MARK: - Parent Controller
+
+extension CurrentWeatherViewController: CurrentWeatherVCDelagate {
+    // func updateChild(with viewModel: WeatherViewModel, city: RawForecast.City) {
+    //print(viewModel)
+    //        DispatchQueue.main.async {
+    //            self.temperatureLabel.text = viewModel.currentTempFahrenheitString
+    //            self.dateAndTimeLabel.text = viewModel.dateFormatted
+    //            self.locationLabel.text = city.name
+    //        }
+    //    }
+    
+    func updateChild(forecast: Forecast) {
+        self.forecast = forecast
+        updateCurrentWeatherInterface()
+        updateFutureForecastStack()
+    }
+}
