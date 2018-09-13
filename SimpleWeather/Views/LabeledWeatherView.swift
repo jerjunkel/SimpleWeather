@@ -9,35 +9,31 @@
 import UIKit
 
 class LabeledWeatherView: UIView {
-    private var label: String = ""
-    private let conditionImageNameDic: [Weather.Condition: String] = [
-        .atmosphere: "mist_day.png",
-        .clear: "clear_sky_day.png",
-        .clouds: "broken_clouds_day.png",
-        .drizzle: "rain_day.png",
-        .rain: "shower_rain_day.png",
-        .snow: "snow_day.png",
-        .thunderStorm: "thunderstorm_day.png",
-        .unknown: "mist_day.png"
-    ]
     var condition: Weather.Condition = .clear {
         didSet{
-            setImageForWeatherCondition()
+            setImageFor(condition: condition)
         }
     }
     
-     convenience init(_ label: String, condition:  Weather.Condition) {
-        self.init()
-        self.label = label
-        self.condition = condition
+    var title: String = "" {
+        didSet {
+            setLabel(text: title)
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     //MARK: - Utilities
     private func setupView() {
         addSubviews()
         setConstraints()
-        setLabelText()
     }
     
     private func addSubviews() {
@@ -61,21 +57,16 @@ class LabeledWeatherView: UIView {
             ])
     }
     
-    private func setImageForWeatherCondition() {
-        guard let imageString = conditionImageNameDic[condition],
-            let image = UIImage(named: imageString) else { return }
-        
-        DispatchQueue.main.async {
-            self.conditionImageView.image = image
-        }
+    private func setImageFor(condition: Weather.Condition) {
+        conditionImageView.condition = condition
     }
     
-    private func setLabelText() {
-        titleLabel.text = label
+    private func setLabel(text: String) {
+        titleLabel.text = text
     }
     
     //MARK: - Properties
-    var titleLabel: UILabel = {
+    private var titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = App.Color.white.color
         label.textAlignment = .center
@@ -84,10 +75,9 @@ class LabeledWeatherView: UIView {
         return label
     }()
     
-    private var conditionImageView: UIImageView = {
-        let imageView = UIImageView()
+    private var conditionImageView: WeatherImageView = {
+        let imageView = WeatherImageView()
         imageView.setAutoresizingMaskToFalse()
         return imageView
     }()
-    
 }
