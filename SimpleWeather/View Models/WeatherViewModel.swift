@@ -31,16 +31,14 @@ struct WeatherViewModel {
     
     var dateFormatted: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.medium //Set date style
-       // dateFormatter.timeZone = self.timeZone
+        dateFormatter.dateStyle = DateFormatter.Style.medium
         let localDate = dateFormatter.string(from: dateObject)
-        
         return localDate
     }
     
     var time: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.timeStyle = DateFormatter.Style.short //Set time style
+        dateFormatter.timeStyle = DateFormatter.Style.short
         let localDate = dateFormatter.string(from: dateObject)
         return localDate
     }
