@@ -81,10 +81,9 @@ class CurrentWeatherViewController: UIViewController {
             let weatherModels = self.forecast!.weatherModels
             let stackViews = self.weatherStack.arrangedSubviews.map { $0 as! LabeledWeatherView }
             
-            for i in 0..<stackViews.count {
-                print(weatherModels[i].dateFormatted)
-                stackViews[i].title = weatherModels[i].time
-                stackViews[i].condition = weatherModels[i].condition
+            for (index, view) in stackViews.enumerated() {
+                view.title = weatherModels[index].time
+                view.condition = weatherModels[index].condition
             }
         }
     }
