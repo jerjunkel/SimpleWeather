@@ -83,7 +83,6 @@ class LabeledWeatherView: UIView {
     
     private var conditionImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .green
         imageView.setAutoresizingMaskToFalse()
         return imageView
     }()
