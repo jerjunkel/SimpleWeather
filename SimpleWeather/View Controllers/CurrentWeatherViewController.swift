@@ -85,6 +85,7 @@ class CurrentWeatherViewController: UIViewController {
             for i in 0..<stackViews.count {
                 print(weatherModels[i].dateFormatted)
                 stackViews[i].titleLabel.text = weatherModels[i].time
+                stackViews[i].condition = weatherModels[i].condition
             }
             
 //            self.weatherStack.arrangedSubviews.forEach { view  in
