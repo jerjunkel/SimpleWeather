@@ -84,7 +84,7 @@ class CurrentWeatherViewController: UIViewController {
             
             for i in 0..<stackViews.count {
                 print(weatherModels[i].dateFormatted)
-                stackViews[i].titleLabel.text = weatherModels[i].time
+                stackViews[i].title = weatherModels[i].time
                 stackViews[i].condition = weatherModels[i].condition
             }
             
@@ -135,7 +135,7 @@ class CurrentWeatherViewController: UIViewController {
     private var weatherStack: UIStackView = {
         
         let testViews = ["mon","tue","wed","thur","fri"].map({ (day) -> LabeledWeatherView in
-            let weatherImage = LabeledWeatherView(day.capitalized, condition: .clear)
+            let weatherImage = LabeledWeatherView()
             return weatherImage
         })
         
