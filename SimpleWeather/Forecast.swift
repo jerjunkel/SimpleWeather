@@ -8,19 +8,26 @@
 
 import Foundation
 
-struct Forecast {
-    var city: RawForecast.City?
-    private var weatherArray: [Weather] = []
-    //private var weatherViewModels: [WeatherViewModel] = []
-    private var forecastJson: RawForecast?
-    
+protocol Forecastable {
+    var weatherArray: [Weather] { get set }
+    init (weather: [Weather])
+}
+
+extension Forecastable {
     var weatherModels: [WeatherViewModel] {
         return weatherArray.map { WeatherViewModel(weather: $0) }
     }
     
     var weatherObjects: [Weather] {
-       return weatherArray
+        return weatherArray
     }
+}
+
+struct Forecast: Forecastable {
+    var city: RawForecast.City?
+    var weatherArray: [Weather] = []
+    //private var weatherViewModels: [WeatherViewModel] = []
+    private var forecastJson: RawForecast?
     
     init(weather: [Weather]) {
         self.weatherArray = weather
