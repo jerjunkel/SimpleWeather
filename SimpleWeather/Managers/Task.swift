@@ -18,6 +18,8 @@ class Task {
         session.dataTask(with: urlRequest) { (data, response, error) in
             if let data = data {
                 closure(.some(data))
+            } else {
+                closure(.error)
             }
         }.resume()
     }
