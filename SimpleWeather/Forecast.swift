@@ -40,12 +40,17 @@ struct Forecast {
         }
     }
     
-    func fiveDayForecast() -> Forecast {
+    func fiveHourForecast() -> Forecast {
         guard weatherArray.count > 5 else { return self }
         let fiveHourSlice = weatherArray[0..<5]
         var forecast = Forecast(weather: Array(fiveHourSlice))
         forecast.city = city
         return forecast
+    }
+    
+    func threeDayForecast() -> Forecast {
+        
+        fatalError()
     }
     
     mutating func add(_ weather: Weather) {
