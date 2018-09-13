@@ -49,8 +49,8 @@ class CurrentWeatherViewController: UIViewController {
         NSLayoutConstraint.activate([
             currentWeatherConditionImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             currentWeatherConditionImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -70),
-            currentWeatherConditionImageView.heightAnchor.constraint(equalToConstant: 200),
-            currentWeatherConditionImageView.widthAnchor.constraint(equalToConstant: 200)
+            currentWeatherConditionImageView.heightAnchor.constraint(equalToConstant: 150),
+            currentWeatherConditionImageView.widthAnchor.constraint(equalToConstant: 150)
             ])
         
         NSLayoutConstraint.activate([
@@ -104,7 +104,7 @@ class CurrentWeatherViewController: UIViewController {
         label.text = "Location"
         label.numberOfLines = 2
         label.textColor = App.Color.white.color
-        label.font = UIFont.boldSystemFont(ofSize: 50)
+        label.font = UIFont.boldSystemFont(ofSize: 70)
         return label
     }()
     
