@@ -14,6 +14,7 @@ struct WeatherViewModel {
 //    let minTemp: Float
 //    let maxTemp: Float
     let currentDiscription: String
+    let condition: Weather.Condition
     
     private var dateObject: Date {
         return Date(timeIntervalSince1970: date)
@@ -43,15 +44,10 @@ struct WeatherViewModel {
         return localDate
     }
     
-    init(weatherData: RawWeatherInfo) {
-        date = weatherData.dt
-        currentTemp = weatherData.main.temp
-        currentDiscription = weatherData.weather[0].description
-    }
-    
     init(weather: Weather) {
         date = weather.date
         currentTemp = weather.temperature.current
         currentDiscription = weather.mainDescription
+        condition = weather.condition
     }
 }
