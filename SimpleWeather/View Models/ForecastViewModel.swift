@@ -22,9 +22,9 @@ struct ForecastViewModel {
     }
     
     private mutating func makeWeatherViewModels() {
-        for weatherData in forecastData.list {
-            let weatherViewModel = WeatherViewModel(weatherData: weatherData)
-            weatherViewModels.append(weatherViewModel)
-        }
+//        for weatherData in forecastData.list {
+//            let weatherViewModel = WeatherViewModel(weatherData: weatherData)
+//            weatherViewModels.append(weatherViewModel)
+//        }
     }
 }
