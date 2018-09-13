@@ -48,9 +48,13 @@ struct Forecast {
         return forecast
     }
     
-    func threeDayForecast() -> Forecast {
+    func fiveDayForecast() -> Forecast {
+        var fiveDayweatherObjects: [Weather] = []
         
-        fatalError()
+        for index in stride(from: 0, to: 40, by: 8) {
+            fiveDayweatherObjects.append(weatherObjects[index])
+        }
+        return Forecast(weather: fiveDayweatherObjects)
     }
     
     mutating func add(_ weather: Weather) {
