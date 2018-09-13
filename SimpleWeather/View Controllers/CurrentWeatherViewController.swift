@@ -9,7 +9,6 @@
 import UIKit
 
 protocol CurrentWeatherVCDelagate: class {
-    //func updateChild(with: WeatherViewModel, city: RawForecast.City)
     func updateChild(forecast: Forecast)
 }
 
@@ -63,7 +62,6 @@ class CurrentWeatherViewController: UIViewController {
             weatherStack.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 40),
             weatherStack.centerXAnchor.constraint(equalTo: view.centerXAnchor)
             ])
-        //          weatherStack.center = view.center
     }
     
     private func updateCurrentWeatherInterface() {
@@ -88,11 +86,6 @@ class CurrentWeatherViewController: UIViewController {
                 stackViews[i].title = weatherModels[i].time
                 stackViews[i].condition = weatherModels[i].condition
             }
-            
-//            self.weatherStack.arrangedSubviews.forEach { view  in
-//                let weatherView = view as! LabeledWeatherView
-//                weatherView.titleLabel.text = "Test"
-//            }
         }
     }
     
@@ -147,17 +140,6 @@ class CurrentWeatherViewController: UIViewController {
         return stack
         
     }()
-    
-    //    private var weatherStack: WeatherStack = {
-    //        let testViews = ["mon","tue","wed","thur","fri"].map({ (day) -> LabledWeatherView in
-    //            let weatherImage = LabledWeatherView(day, condition: .clear)
-    //            return weatherImage
-    //        })
-    //
-    //        let stack = WeatherStack(view: testViews)
-    //        stack.setAutoresizngMaskToFalse()
-    //        return stack
-    //    }()
 }
 
 //MARK: - Parent Controller
