@@ -10,7 +10,6 @@ import UIKit
 
 class LabeledWeatherView: UIView {
     private var label: String = ""
-    private var condition: Weather.Condition = .clear
     private let conditionImageNameDic: [Weather.Condition: String] = [
         .atmosphere: "mist_day.png",
         .clear: "clear_sky_day.png",
@@ -21,6 +20,11 @@ class LabeledWeatherView: UIView {
         .thunderStorm: "thunderstorm_day.png",
         .unknown: "mist_day.png"
     ]
+    var condition: Weather.Condition = .clear {
+        didSet{
+            setImageForWeatherCondition()
+        }
+    }
     
      convenience init(_ label: String, condition:  Weather.Condition) {
         self.init()
@@ -33,7 +37,6 @@ class LabeledWeatherView: UIView {
     private func setupView() {
         addSubviews()
         setConstraints()
-        setImageForWeatherCondition()
         setLabelText()
     }
     
