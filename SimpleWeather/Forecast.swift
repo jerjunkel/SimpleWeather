@@ -86,3 +86,11 @@ extension Forecast: Sequence {
         return weatherArray.makeIterator()
     }
 }
+
+struct ForecastSlice: Forecastable {
+    var weatherArray: [Weather]
+    
+    init(weather: [Weather]) {
+        weatherArray = weather
+    }
+}
