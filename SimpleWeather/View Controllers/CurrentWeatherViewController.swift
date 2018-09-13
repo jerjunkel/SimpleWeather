@@ -32,7 +32,7 @@ class CurrentWeatherViewController: UIViewController {
         view.addSubview(dateAndTimeLabel)
         view.addSubview(locationLabel)
         view.addSubview(temperatureLabel)
-        view.addSubview(weatherConditionImageView)
+        view.addSubview(currentWeatherConditionImageView)
         view.addSubview(weatherStack)
     }
     
@@ -48,15 +48,15 @@ class CurrentWeatherViewController: UIViewController {
             ])
         
         NSLayoutConstraint.activate([
-            weatherConditionImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            weatherConditionImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -70),
-            weatherConditionImageView.heightAnchor.constraint(equalToConstant: 200),
-            weatherConditionImageView.widthAnchor.constraint(equalToConstant: 200)
+            currentWeatherConditionImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            currentWeatherConditionImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -70),
+            currentWeatherConditionImageView.heightAnchor.constraint(equalToConstant: 200),
+            currentWeatherConditionImageView.widthAnchor.constraint(equalToConstant: 200)
             ])
         
         NSLayoutConstraint.activate([
             temperatureLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            temperatureLabel.topAnchor.constraint(equalTo: weatherConditionImageView.bottomAnchor, constant: 30)
+            temperatureLabel.topAnchor.constraint(equalTo: currentWeatherConditionImageView.bottomAnchor, constant: 30)
             ])
         
         NSLayoutConstraint.activate([
@@ -74,6 +74,7 @@ class CurrentWeatherViewController: UIViewController {
             self.temperatureLabel.text = viewModel.currentTempFahrenheitString
             self.dateAndTimeLabel.text = viewModel.dateFormatted
             self.locationLabel.text = forecast.city?.name
+            self.currentWeatherConditionImageView.condition = viewModel.condition
         }
     }
     
@@ -125,10 +126,9 @@ class CurrentWeatherViewController: UIViewController {
         return label
     }()
     
-    private var weatherConditionImageView: UIImageView = {
-        let imageView = UIImageView()
+    private var currentWeatherConditionImageView: WeatherImageView = {
+        let imageView = WeatherImageView()
         imageView.setAutoresizingMaskToFalse()
-        imageView.backgroundColor = .red
         return imageView
     }()
     
