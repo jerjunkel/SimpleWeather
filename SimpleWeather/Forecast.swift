@@ -8,12 +8,21 @@
 
 import Foundation
 
-protocol Forecastable {
+protocol Forecastable: Sequence where
+    Iterator == IndexingIterator<[Element]>,
+    Element == Weather {
+    
     var weatherArray: [Weather] { get set }
     init (weather: [Weather])
 }
 
 extension Forecastable {
+    typealias Subsquence = AnySequence
+    
+    func makeIterator() -> Iterator {
+        return weatherArray.makeIterator()
+    }
+    
     var weatherModels: [WeatherViewModel] {
         return weatherArray.map { WeatherViewModel(weather: $0) }
     }
@@ -23,6 +32,7 @@ extension Forecastable {
     }
 }
 
+///A collection of weather objects.
 struct Forecast: Forecastable {
     var city: RawForecast.City?
     var weatherArray: [Weather] = []
@@ -77,20 +87,19 @@ struct Forecast: Forecastable {
 //    }
 //}
 
-extension Forecast: Sequence {
-    typealias Element = Weather
-    typealias Iterator = IndexingIterator<[Element]>
-    typealias Subsquence = AnySequence
-    
-    func makeIterator() -> Iterator {
-        return weatherArray.makeIterator()
-    }
-}
-
+///A slice of a Forecast instance.
 struct ForecastSlice: Forecastable {
     var weatherArray: [Weather]
     
     init(weather: [Weather]) {
         weatherArray = weather
+    }
+    
+    mutating func add(weather: Weather) {
+        weatherArray.append(weather)
+    }
+    
+    mutating func add(forecast: ForecastSlice) {
+        weatherArray = weatherArray + forecast.weatherArray
     }
 }
