@@ -57,21 +57,25 @@ struct Forecast: Forecastable {
         }
     }
     
-    func fiveHourForecast() -> Forecast {
-        guard weatherArray.count > 5 else { return self }
+    func currentWeather() -> ForecastSlice {
+        guard let currentWeather = weatherArray.first else { return ForecastSlice()}
+        return ForecastSlice(weather: currentWeather)
+    }
+    
+    func fiveHourForecast() -> ForecastSlice {
+        guard weatherArray.count > 5 else { return ForecastSlice(weather: self.weatherArray) }
         let fiveHourSlice = weatherArray[0..<5]
-        var forecast = Forecast(weather: Array(fiveHourSlice))
-        forecast.city = city
+        let forecast = ForecastSlice(weather: Array(fiveHourSlice))
         return forecast
     }
     
-    func fiveDayForecast() -> Forecast {
+    func fiveDayForecast() -> ForecastSlice {
         var fiveDayweatherObjects: [Weather] = []
         
         for index in stride(from: 0, to: 40, by: 8) {
             fiveDayweatherObjects.append(weatherObjects[index])
         }
-        return Forecast(weather: fiveDayweatherObjects)
+        return ForecastSlice(weather: fiveDayweatherObjects)
     }
     
     mutating func add(_ weather: Weather) {
@@ -89,10 +93,15 @@ struct Forecast: Forecastable {
 
 ///A slice of a Forecast instance.
 struct ForecastSlice: Forecastable {
-    var weatherArray: [Weather]
+    var weatherArray: [Weather] = []
+    var cityName: String?
     
     init(weather: [Weather]) {
         weatherArray = weather
+    }
+    
+    init(weather: Weather...) {
+        weatherArray = weatherArray + weather
     }
     
     mutating func add(weather: Weather) {
