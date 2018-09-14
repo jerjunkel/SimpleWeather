@@ -49,7 +49,7 @@ class WeatherViewController: UIViewController {
         guard let forecast = forecast else { return }
         //guard let currentWeatherViewModel = forecast.weatherModels.first else { return }
         //currentWeatherVCDelegate?.updateChild(with: currentWeatherViewModel, city: forecast.city!)
-        currentWeatherVCDelegate?.updateChild(forecast: forecast.fiveHourForecast())
+        currentWeatherVCDelegate?.updateChild(forecast: forecast)
     }
 }
 

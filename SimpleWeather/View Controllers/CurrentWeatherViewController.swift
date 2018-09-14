@@ -66,7 +66,7 @@ class CurrentWeatherViewController: UIViewController {
     
     private func updateCurrentWeatherInterface() {
         guard let forecast = forecast else { return }
-        guard let viewModel = forecast.weatherModels.first else { return }
+        guard let viewModel = forecast.currentWeather().weatherModels.first else { return }
         
         DispatchQueue.main.async {
             self.temperatureLabel.text = viewModel.currentTempFahrenheitString
