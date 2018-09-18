@@ -9,6 +9,7 @@
 import UIKit
 
 class WeatherCollectionViewCell: UICollectionViewCell {
+    static let identifier = "forecastCellID"
     private var labeledWeatherView = LabeledWeatherView()
     var weatherModel: WeatherViewModel? {
         didSet {

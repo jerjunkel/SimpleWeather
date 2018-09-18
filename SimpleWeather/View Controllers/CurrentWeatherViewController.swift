@@ -25,6 +25,7 @@ class CurrentWeatherViewController: UIViewController {
         view.backgroundColor = .clear
         addSubviews()
         setContraints()
+        setupForecastCollectionView()
     }
     
     private func addSubviews() {
@@ -65,6 +66,7 @@ class CurrentWeatherViewController: UIViewController {
             ])
         
         NSLayoutConstraint.activate([
+            forecastCollectionView.heightAnchor.constraint(equalToConstant: 150),
             forecastCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             forecastCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             forecastCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -80,6 +82,7 @@ class CurrentWeatherViewController: UIViewController {
             self.dateAndTimeLabel.text = viewModel.dateFormatted
             self.locationLabel.text = forecast.city?.name
             self.currentWeatherConditionImageView.condition = viewModel.condition
+            self.reloadCollectionView()
         }
     }
     
@@ -94,6 +97,16 @@ class CurrentWeatherViewController: UIViewController {
                 view.condition = weatherModels[index].condition
             }
         }
+    }
+    
+    private func setupForecastCollectionView() {
+        forecastCollectionView.delegate = self
+        forecastCollectionView.dataSource = self
+        forecastCollectionView.register(WeatherCollectionViewCell.self, forCellWithReuseIdentifier: WeatherCollectionViewCell.identifier)
+    }
+    
+    private func reloadCollectionView() {
+        forecastCollectionView.reloadData()
     }
     
     //MARK: - Properties
@@ -148,16 +161,18 @@ class CurrentWeatherViewController: UIViewController {
         
     }()
     
-    private var forecastCollectionView: UICollectionView {
+    private var forecastCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.itemSize = CGSize(width: 100, height: 100)
         
-        let collectionView = UICollectionView()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.setAutoresizingMaskToFalse()
-        collectionView.collectionViewLayout = flowLayout
+        collectionView.backgroundColor = .clear
+        
+//        collectionView.collectionViewLayout = flowLayout
         return collectionView
-    }
+    }()
 }
 
 //MARK: - Parent Controller
@@ -176,6 +191,23 @@ extension CurrentWeatherViewController: CurrentWeatherVCDelagate {
         self.forecast = forecast
         updateCurrentWeatherInterface()
         updateFutureForecastStack()
+    }
+}
+
+extension CurrentWeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let forecast = forecast else { return 0}
+        return forecast.fiveDayForecast().weatherModels.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print("Test")
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCollectionViewCell.identifier, for: indexPath) as!
+        WeatherCollectionViewCell
+        
+        cell.weatherModel = forecast?.fiveDayForecast().weatherModels[indexPath.row]
+
+        return cell
     }
 }
 
