@@ -36,21 +36,17 @@ extension Forecastable {
 struct Forecast: Forecastable {
     var city: RawForecast.City?
     var weatherArray: [Weather] = []
-    //private var weatherViewModels: [WeatherViewModel] = []
-    private var forecastJson: RawForecast?
     
     init(weather: [Weather]) {
         self.weatherArray = weather
     }
     
-    init(rawForecast: RawForecast) {
-        forecastJson = rawForecast
-        city = rawForecast.city
-        makeWeatherObjects()
+    init(forecastJson: RawForecast) {
+        city = forecastJson.city
+        makeWeatherObjects(from: forecastJson)
     }
     
-    private mutating func makeWeatherObjects() {
-        guard let json = forecastJson else { return }
+    private mutating func makeWeatherObjects(from json: RawForecast) {
         for weatherData in json.list {
             let weatherObject = Weather(weatherData: weatherData)
             weatherArray.append(weatherObject)

@@ -85,7 +85,7 @@ extension WeatherViewController {
             
             do {
                 let jsonData = try decoder.decode(RawForecast.self, from: data)
-                self.forecast = Forecast(rawForecast: jsonData)
+                self.forecast = Forecast(forecastJson: jsonData)
                 
             } catch {
                 print(error.localizedDescription)
