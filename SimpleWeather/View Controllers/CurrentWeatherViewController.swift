@@ -78,7 +78,8 @@ class CurrentWeatherViewController: UIViewController {
     
     private func updateFutureForecastStack() {
         DispatchQueue.main.async {
-            let weatherModels = self.forecast!.weatherModels
+            guard let forecast = self.forecast else { return }
+            let weatherModels = forecast.weatherModels
             let stackSubviews = self.weatherStack.arrangedSubviews.map { $0 as! LabeledWeatherView }
             
             for (index, view) in stackSubviews.enumerated() {
