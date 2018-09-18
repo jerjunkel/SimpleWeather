@@ -140,6 +140,17 @@ class CurrentWeatherViewController: UIViewController {
         return stack
         
     }()
+    
+    private var forecastCollectionView: UICollectionView {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.itemSize = CGSize(width: 100, height: 100)
+        
+        let collectionView = UICollectionView()
+        collectionView.setAutoresizingMaskToFalse()
+        collectionView.collectionViewLayout = flowLayout
+        return collectionView
+    }
 }
 
 //MARK: - Parent Controller
