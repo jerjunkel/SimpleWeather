@@ -33,6 +33,7 @@ class CurrentWeatherViewController: UIViewController {
         view.addSubview(temperatureLabel)
         view.addSubview(currentWeatherConditionImageView)
         view.addSubview(weatherStack)
+        view.addSubview(forecastCollectionView)
     }
     
     private func setContraints() {
@@ -61,6 +62,12 @@ class CurrentWeatherViewController: UIViewController {
         NSLayoutConstraint.activate([
             weatherStack.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 40),
             weatherStack.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            ])
+        
+        NSLayoutConstraint.activate([
+            forecastCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            forecastCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            forecastCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
             ])
     }
     
@@ -171,3 +178,4 @@ extension CurrentWeatherViewController: CurrentWeatherVCDelagate {
         updateFutureForecastStack()
     }
 }
+
