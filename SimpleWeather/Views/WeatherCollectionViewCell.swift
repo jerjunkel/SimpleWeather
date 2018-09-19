@@ -34,6 +34,11 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    private func customizeContentView() {
+        contentView.backgroundColor = .white
+        contentView.layer.cornerRadius = 10
+    }
+    
     private func setupCell() {
         setAutoresizingMaskToFalse()
         customizeCell()
@@ -51,6 +56,6 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     }
     
     private func customizeCell() {
-        backgroundColor = .white
+        customizeContentView()
     }
 }
