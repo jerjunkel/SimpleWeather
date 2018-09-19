@@ -170,7 +170,7 @@ class CurrentWeatherViewController: UIViewController {
         collectionView.setAutoresizingMaskToFalse()
         collectionView.backgroundColor = .clear
         
-//        collectionView.collectionViewLayout = flowLayout
+        //        collectionView.collectionViewLayout = flowLayout
         return collectionView
     }()
 }
@@ -201,12 +201,10 @@ extension CurrentWeatherViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("Test")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCollectionViewCell.identifier, for: indexPath) as!
         WeatherCollectionViewCell
         
         cell.weatherModel = forecast?.fiveDayForecast().weatherModels[indexPath.row]
-
         return cell
     }
 }

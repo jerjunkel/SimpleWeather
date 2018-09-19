@@ -34,6 +34,7 @@ class LabeledWeatherView: UIView {
     private func setupView() {
         addSubviews()
         setConstraints()
+        setAutoresizingMaskToFalse()
     }
     
     private func addSubviews() {
@@ -52,8 +53,8 @@ class LabeledWeatherView: UIView {
             conditionImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             conditionImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             conditionImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            conditionImageView.heightAnchor.constraint(equalToConstant: 60),
-            conditionImageView.widthAnchor.constraint(equalToConstant: 60)
+//            conditionImageView.heightAnchor.constraint(equalToConstant: 60),
+//            conditionImageView.widthAnchor.constraint(equalToConstant: 60)
             ])
     }
     

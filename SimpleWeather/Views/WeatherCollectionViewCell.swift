@@ -35,6 +35,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupCell() {
+        setAutoresizingMaskToFalse()
         customizeCell()
         addLabeledView()
     }
