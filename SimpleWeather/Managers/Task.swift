@@ -10,16 +10,16 @@ import Foundation
 
 class Task {
     static let session = URLSession(configuration: .default)
-    static func request(_ request: Request, closure: @escaping (Response) -> ()) {
+    static func request(_ request: Request, onCompletion: @escaping (Response) -> ()) {
         guard let urlRequest = request.urlRequest else {
-            closure(.error)
+            onCompletion(.error)
             return }
         
         session.dataTask(with: urlRequest) { (data, response, error) in
             if let data = data {
-                closure(.some(data))
+                onCompletion(.some(data))
             } else {
-                closure(.error)
+                onCompletion(.error)
             }
         }.resume()
     }
