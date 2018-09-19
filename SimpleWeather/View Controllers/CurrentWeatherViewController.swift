@@ -132,7 +132,6 @@ class CurrentWeatherViewController: UIViewController {
     private var temperatureLabel: UILabel = {
         let label = UILabel()
         label.setAutoresizingMaskToFalse()
-        //label.text = "13°C"
         label.numberOfLines = 1
         label.textColor = App.Color.white.color
         label.font = UIFont.boldSystemFont(ofSize: 50)
@@ -169,8 +168,6 @@ class CurrentWeatherViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.setAutoresizingMaskToFalse()
         collectionView.backgroundColor = .clear
-        
-        //        collectionView.collectionViewLayout = flowLayout
         return collectionView
     }()
 }
@@ -178,15 +175,6 @@ class CurrentWeatherViewController: UIViewController {
 //MARK: - Parent Controller
 
 extension CurrentWeatherViewController: CurrentWeatherVCDelagate {
-    // func updateChild(with viewModel: WeatherViewModel, city: RawForecast.City) {
-    //print(viewModel)
-    //        DispatchQueue.main.async {
-    //            self.temperatureLabel.text = viewModel.currentTempFahrenheitString
-    //            self.dateAndTimeLabel.text = viewModel.dateFormatted
-    //            self.locationLabel.text = city.name
-    //        }
-    //    }
-    
     func updateChild(forecast: Forecast) {
         self.forecast = forecast
         updateCurrentWeatherInterface()
