@@ -67,6 +67,9 @@ class LabeledWeatherView: UIView {
         titleLabel.text = text
     }
     
+    func setLabelColor(color: UIColor) {
+        titleLabel.textColor = color
+    }
     //MARK: - Properties
     private var titleLabel: UILabel = {
         let label = UILabel()
