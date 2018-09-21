@@ -62,7 +62,6 @@ class CurrentWeatherViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             weatherStack.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 40),
-           // weatherStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             weatherStack.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             weatherStack.trailingAnchor.constraint(equalTo: view.trailingAnchor)
             ])
