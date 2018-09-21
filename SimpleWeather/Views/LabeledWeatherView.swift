@@ -76,6 +76,7 @@ class LabeledWeatherView: UIView {
         label.textColor = App.Color.white.color
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 15)
+        label.numberOfLines = 1
         label.setAutoresizingMaskToFalse()
         return label
     }()
