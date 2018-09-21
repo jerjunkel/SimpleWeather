@@ -51,8 +51,9 @@ class LabeledWeatherView: UIView {
         
         NSLayoutConstraint.activate([
             conditionImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            conditionImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            conditionImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            conditionImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            conditionImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            conditionImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
 //            conditionImageView.heightAnchor.constraint(equalToConstant: 60),
 //            conditionImageView.widthAnchor.constraint(equalToConstant: 60)
             ])
