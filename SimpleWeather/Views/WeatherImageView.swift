@@ -36,6 +36,7 @@ class WeatherImageView: UIView {
     }
     
     private func setupView() {
+        setAutoresizingMaskToFalse()
         addSubview(imageView)
         
         NSLayoutConstraint.activate([
