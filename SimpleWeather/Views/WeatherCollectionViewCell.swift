@@ -10,7 +10,6 @@ import UIKit
 
 class WeatherCollectionViewCell: UICollectionViewCell {
     static let identifier = "forecastCellID"
-    private var labeledWeatherView = LabeledWeatherView()
     var weatherModel: WeatherViewModel? {
         didSet {
             updateCell()
@@ -48,7 +47,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     private func addLabeledView() {
         addSubview(labeledWeatherView)
         NSLayoutConstraint.activate([
-            labeledWeatherView.topAnchor.constraint(equalTo: topAnchor),
+            labeledWeatherView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             labeledWeatherView.bottomAnchor.constraint(equalTo: bottomAnchor),
             labeledWeatherView.leadingAnchor.constraint(equalTo: leadingAnchor),
             labeledWeatherView.trailingAnchor.constraint(equalTo: trailingAnchor)
@@ -58,4 +57,10 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     private func customizeCell() {
         customizeContentView()
     }
+    
+    private var labeledWeatherView: LabeledWeatherView = {
+        let label = LabeledWeatherView()
+        label.setLabelColor(color: .black)
+        return label
+    }()
 }
