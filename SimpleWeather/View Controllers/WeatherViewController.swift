@@ -40,9 +40,9 @@ class WeatherViewController: UIViewController {
     }
     
     private func addViewControllerToParent(_ viewController: UIViewController) {
-        addChildViewController(viewController)
+        addChild(viewController)
         view.addSubview(viewController.view)
-        viewController.didMove(toParentViewController: self)
+        viewController.didMove(toParent: self)
     }
     
     private func updateCurrentWeatherVC() {
@@ -108,6 +108,9 @@ extension WeatherViewController: LocationConsuming {
             //currentLocation = LocationManager.shared.currentLocationCoordinates
         case .locationUnreachable:
             break
+        case .authorizationNeeded:
+            break
         }
+        
     }
 }

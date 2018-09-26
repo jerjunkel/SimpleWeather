@@ -236,9 +236,11 @@
 				TargetAttributes = {
 					1AF3390A2114E41200CDB50C = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 					1AF3391E2114E41400CDB50C = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = 1AF3390A2114E41200CDB50C;
 					};
 				};
@@ -463,7 +465,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jermiainekelly.SimpleWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -481,7 +483,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jermiainekelly.SimpleWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -501,7 +503,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jermiainekelly.SimpleWeatherTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimpleWeather.app/SimpleWeather";
 			};
@@ -522,7 +524,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jermiainekelly.SimpleWeatherTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimpleWeather.app/SimpleWeather";
 			};
