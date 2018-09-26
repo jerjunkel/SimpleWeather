@@ -15,6 +15,7 @@ class WeatherViewController: UIViewController {
         }
     }
     private var currentWeatherVC: CurrentWeatherViewController = CurrentWeatherViewController()
+    private let notificationView = NotificationView()
     private weak var currentWeatherVCDelegate: CurrentWeatherVCDelagate?
     private var currentLocation: Coordinates? {
         didSet {
