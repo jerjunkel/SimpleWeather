@@ -63,7 +63,18 @@ class WeatherViewController: UIViewController {
             notificationView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75)
             ])
     }
-
+    
+    private func showNotificationView() {
+        UIView.animate(withDuration: 0.5) {
+            self.notificationView.transform = CGAffineTransform(translationX: -200, y: 0)
+        }
+    }
+    
+    private func hideNotificationView() {
+        UIView.animate(withDuration: 0.5) {
+            self.notificationView.transform = CGAffineTransform.identity
+        }
+    }
 }
 
 //MARK: - Forecast Info
