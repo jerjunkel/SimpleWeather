@@ -113,4 +113,12 @@ extension WeatherViewController: LocationConsuming {
         }
         
     }
+    
+    private func showErrorPopUp(message: String) {
+        
+    }
+    
+    private func hideErrorPopUp() {
+        
+    }
 }
