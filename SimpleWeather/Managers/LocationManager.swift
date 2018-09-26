@@ -51,13 +51,17 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
         return Coordinates(lat: coordinates.latitude, long: coordinates.longitude)
     }
     
-    func requestWhenInUse() {
+    func requestAuthorization() {
         locationManager.requestWhenInUseAuthorization()
     }
  
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if case .authorizedWhenInUse = status {
             locationManager.startUpdatingLocation()
+        }
+        
+        if case .notDetermined = status {
+            requestAuthorization()
         }
     }
     
