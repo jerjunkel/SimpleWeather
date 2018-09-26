@@ -66,7 +66,7 @@ class WeatherViewController: UIViewController {
     
     private func showNotificationView() {
         UIView.animate(withDuration: 0.5) {
-            self.notificationView.transform = CGAffineTransform(translationX: -200, y: 0)
+            self.notificationView.transform = CGAffineTransform(translationX: 0, y: -100)
         }
     }
     
