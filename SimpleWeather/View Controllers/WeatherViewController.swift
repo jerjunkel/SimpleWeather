@@ -28,7 +28,7 @@ class WeatherViewController: UIViewController {
         setupViewController()
     }
     
-    //MARK: - Utilites
+    //MARK: - Setup Utilites
     private func setupViewController() {
         view.backgroundColor = App.Color.blue.color
         LocationManager.shared.delegate = self
@@ -54,6 +54,7 @@ class WeatherViewController: UIViewController {
         currentWeatherVCDelegate?.updateChild(forecast: forecast)
     }
     
+    //MARK:- Notification View Utilities
     private func addNotificationViewAndSetConstraints() {
         view.addSubview(notificationView)
         
@@ -130,20 +131,16 @@ extension WeatherViewController: LocationConsuming {
             let locationCoordinates = location.coordinate
             currentLocation = Coordinates(lat: locationCoordinates.latitude, long: locationCoordinates.longitude)
             //currentLocation = LocationManager.shared.currentLocationCoordinates
+            hideNotificationView()
         case .locationUnreachable:
             showErrorPopUp(message: "Location unreachable")
         case .authorizationNeeded:
             showErrorPopUp(message: "User needs to authorize application")
         }
-        
     }
     
     private func showErrorPopUp(message: String) {
         notificationView.setNotification(message: message)
         showNotificationView()
-    }
-    
-    private func hideErrorPopUp() {
-        
     }
 }
