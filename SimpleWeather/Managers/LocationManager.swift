@@ -11,6 +11,7 @@ import CoreLocation
 enum LocationStatus {
     case newLocation(CLLocation)
     case locationUnreachable
+    case authorizationNeeded
 }
 
 protocol LocationConsuming: class {
