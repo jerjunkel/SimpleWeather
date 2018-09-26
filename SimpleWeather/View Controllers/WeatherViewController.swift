@@ -33,6 +33,7 @@ class WeatherViewController: UIViewController {
         view.backgroundColor = App.Color.blue.color
         LocationManager.shared.delegate = self
         addCurrentWeatherViewController()
+        addNotificationViewAndSetConstraints()
     }
     
     private func addCurrentWeatherViewController() {
@@ -52,6 +53,17 @@ class WeatherViewController: UIViewController {
         //currentWeatherVCDelegate?.updateChild(with: currentWeatherViewModel, city: forecast.city!)
         currentWeatherVCDelegate?.updateChild(forecast: forecast)
     }
+    
+    private func addNotificationViewAndSetConstraints() {
+        view.addSubview(notificationView)
+        
+        NSLayoutConstraint.activate([
+            notificationView.topAnchor.constraint(equalTo: view.bottomAnchor),
+            notificationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            notificationView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75)
+            ])
+    }
+
 }
 
 //MARK: - Forecast Info
