@@ -55,14 +55,15 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
     func requestAuthorization() {
         locationManager.requestWhenInUseAuthorization()
     }
- 
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if case .authorizedWhenInUse = status {
+        switch status {
+        case .authorizedWhenInUse, .authorizedAlways:
             locationManager.startUpdatingLocation()
-        }
-        
-        if case .notDetermined = status {
+        case .notDetermined:
             requestAuthorization()
+        default:
+            delegate?.locationStatusDidChange(to: .authorizationNeeded)
         }
     }
     
