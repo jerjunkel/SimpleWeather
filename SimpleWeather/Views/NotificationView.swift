@@ -9,6 +9,7 @@
 import UIKit
 /// A view used to notify users of errors and application status changes.
 class NotificationView: UIView {
+    private let padding: CGFloat = 5
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,26 +35,28 @@ class NotificationView: UIView {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: leadingAnchor),
-            label.trailingAnchor.constraint(equalTo: trailingAnchor),
+            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             label.centerYAnchor.constraint(equalTo: centerYAnchor)
             ])
         
         NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: 150)
+            heightAnchor.constraint(equalToConstant: 70)
             ])
     }
     
     private func customizeView() {
         backgroundColor = App.Color.white.color
-        layer.cornerRadius = 40
+        layer.cornerRadius = 30
     }
     
     private var label: UILabel = {
         let label = UILabel()
         label.setAutoresizingMaskToFalse()
         label.textColor = App.Color.blue.color
-        label.numberOfLines = 1
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 20)
         return label
     }()
 }
