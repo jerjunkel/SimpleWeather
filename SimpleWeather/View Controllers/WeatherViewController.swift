@@ -131,15 +131,16 @@ extension WeatherViewController: LocationConsuming {
             currentLocation = Coordinates(lat: locationCoordinates.latitude, long: locationCoordinates.longitude)
             //currentLocation = LocationManager.shared.currentLocationCoordinates
         case .locationUnreachable:
-            break
+            showErrorPopUp(message: "Location unreachable")
         case .authorizationNeeded:
-            break
+            showErrorPopUp(message: "User needs to authorize application")
         }
         
     }
     
     private func showErrorPopUp(message: String) {
-        
+        notificationView.setNotification(message: message)
+        showNotificationView()
     }
     
     private func hideErrorPopUp() {
