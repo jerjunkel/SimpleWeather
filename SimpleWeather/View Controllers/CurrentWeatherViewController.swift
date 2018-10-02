@@ -167,6 +167,7 @@ class CurrentWeatherViewController: UIViewController {
         collectionView.setAutoresizingMaskToFalse()
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 15)
         return collectionView
     }()
 }
