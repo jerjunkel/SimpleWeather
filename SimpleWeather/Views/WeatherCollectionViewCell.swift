@@ -28,7 +28,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     private func updateCell() {
         guard let viewModel = weatherModel else { return }
         DispatchQueue.main.async {
-            self.labeledWeatherView.title = viewModel.dateFormatted
+            self.labeledWeatherView.title = viewModel.day
             self.labeledWeatherView.condition = viewModel.condition
         }
     }

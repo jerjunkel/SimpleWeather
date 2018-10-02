@@ -44,6 +44,13 @@ struct WeatherViewModel {
         return localDate
     }
     
+    var day: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE"
+        let day = dateFormatter.string(from: dateObject)
+        return day
+    }
+    
     init(weather: Weather) {
         date = weather.date
         currentTemp = weather.temperature.current
