@@ -116,7 +116,22 @@ extension WeatherViewController {
                 print(error.localizedDescription)
             }
             
-        case .error:
+        case let .error(serverError):
+            handleServerError(error: serverError)
+        }
+    }
+    
+    private func handleServerError(error: ServerResponse) {
+        switch error {
+        case .badRequest:
+            print("Bad Request")
+        case .clientError:
+            print("clientError")
+        case .serverError:
+            print("serverError")
+        case .unknownError:
+            print("unknownError")
+        default:
             break
         }
     }
