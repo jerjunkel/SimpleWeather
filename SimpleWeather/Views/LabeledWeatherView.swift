@@ -83,7 +83,6 @@ class LabeledWeatherView: UIView {
     
     private var conditionImageView: WeatherImageView = {
         let imageView = WeatherImageView()
-        imageView.setAutoresizingMaskToFalse()
         return imageView
     }()
 }
