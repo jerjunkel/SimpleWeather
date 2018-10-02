@@ -18,26 +18,24 @@ class Task {
         session.dataTask(with: urlRequest) { (data, response, error) in
             guard let data = data else {
                 if let serverResponse = response as? HTTPURLResponse {
+                    var serverError =  ServerResponse.unknownError
                     switch serverResponse.statusCode {
                     case 500...599:
-                        print(ServerResponse.serverError)
+                        serverError = .unknownError
                     case 400:
-                        print(ServerResponse.badRequest)
+                        serverError = .badRequest
                     case 401...499:
-                        print(ServerResponse.clientError)
+                        serverError = .clientError
                     default:
-                        print(ServerResponse.unknownError)
+                        serverError = .unknownError
                     }
-                    
+                    onCompletion(.error(serverError))
                 } else {
                     onCompletion(.error(.unknownError))
                 }
-                
                 return
             }
-            
             onCompletion(.some(data))
-            
         }.resume()
     }
 }
