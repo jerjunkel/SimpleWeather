@@ -146,7 +146,6 @@ class CurrentWeatherViewController: UIViewController {
     }()
     
     private var weatherStack: UIStackView = {
-        
         let testViews = ["mon","tue","wed","thur","fri"].map({ (day) -> LabeledWeatherView in
             let weatherImage = LabeledWeatherView()
             return weatherImage
@@ -156,9 +155,7 @@ class CurrentWeatherViewController: UIViewController {
         stack.setAutoresizingMaskToFalse()
         stack.spacing = 10
         stack.distribution = .fillEqually
-        
         return stack
-        
     }()
     
     private var forecastCollectionView: UICollectionView = {
@@ -174,8 +171,7 @@ class CurrentWeatherViewController: UIViewController {
     }()
 }
 
-//MARK: - Parent Controller
-
+//MARK: - Parent Controller Delegate Methods
 extension CurrentWeatherViewController: CurrentWeatherVCDelagate {
     func updateChild(forecast: Forecast) {
         self.forecast = forecast
@@ -184,6 +180,7 @@ extension CurrentWeatherViewController: CurrentWeatherVCDelagate {
     }
 }
 
+//MARK: - CollectionView Delegate Methods
 extension CurrentWeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let forecast = forecast else { return 0}
