@@ -131,8 +131,6 @@ extension WeatherViewController {
             print("serverError")
         case .unknownError:
             print("unknownError")
-        default:
-            break
         }
     }
 }

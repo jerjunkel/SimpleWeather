@@ -40,7 +40,6 @@ struct Request: RequestBuilder {
 ///  -some
 ///  -error
 enum ServerResponseError: Error {
-    case success
     case badRequest
     case clientError
     case serverError
