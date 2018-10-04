@@ -18,7 +18,7 @@ class Task {
         session.dataTask(with: urlRequest) { (data, response, error) in
             guard let data = data else {
                 if let serverResponse = response as? HTTPURLResponse {
-                    var serverError =  ServerResponse.unknownError
+                    var serverError = ServerResponse.unknownError
                     switch serverResponse.statusCode {
                     case 500...599:
                         serverError = .unknownError
