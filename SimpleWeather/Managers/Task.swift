@@ -35,7 +35,7 @@ class Task {
                 }
                 return
             }
-            onCompletion(.some(data))
+            onCompletion(.success(data))
         }.resume()
     }
 }

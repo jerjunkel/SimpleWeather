@@ -105,7 +105,7 @@ extension WeatherViewController {
     
     private func handleResponse(_ response: Result<Data, ServerResponse>) {
         switch response {
-        case .some(let data):
+        case .success(let data):
             let decoder = JSONDecoder()
             
             do {
