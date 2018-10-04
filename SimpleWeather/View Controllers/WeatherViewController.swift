@@ -103,7 +103,7 @@ extension WeatherViewController {
         }
     }
     
-    private func handleResponse(_ response: Result<Data, ServerResponse>) {
+    private func handleResponse(_ response: Result<Data, ServerResponseError>) {
         switch response {
         case .success(let data):
             let decoder = JSONDecoder()
@@ -121,7 +121,7 @@ extension WeatherViewController {
         }
     }
     
-    private func handleServerError(error: ServerResponse) {
+    private func handleServerError(error: ServerResponseError) {
         switch error {
         case .badRequest:
             print("Bad Request")

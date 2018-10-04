@@ -39,7 +39,7 @@ struct Request: RequestBuilder {
 ///Results from a network call that has two possible results:-
 ///  -some
 ///  -error
-enum ServerResponse: Error {
+enum ServerResponseError: Error {
     case success
     case badRequest
     case clientError

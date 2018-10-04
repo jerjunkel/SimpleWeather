@@ -10,7 +10,7 @@ import Foundation
 
 class Task {
     static let session = URLSession(configuration: .default)
-    static func request(_ request: Request, onCompletion: @escaping (Result<Data, ServerResponse>) -> ()) {
+    static func request(_ request: Request, onCompletion: @escaping (Result<Data, ServerResponseError>) -> ()) {
         guard let urlRequest = request.urlRequest else {
             onCompletion(.error(.badRequest))
             return }
@@ -18,7 +18,7 @@ class Task {
         session.dataTask(with: urlRequest) { (data, response, error) in
             guard let data = data else {
                 if let serverResponse = response as? HTTPURLResponse {
-                    var serverError = ServerResponse.unknownError
+                    var serverError = ServerResponseError.unknownError
                     switch serverResponse.statusCode {
                     case 500...599:
                         serverError = .unknownError
