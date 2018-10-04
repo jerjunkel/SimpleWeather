@@ -25,6 +25,7 @@ struct RawForecast: Decodable {
         }
     }
 }
+
 ///A codable structure that represents weather values returned from the weather api endpoint.
 struct RawWeatherInfo: Decodable {
     let dt: Double
