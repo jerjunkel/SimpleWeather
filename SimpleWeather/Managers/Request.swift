@@ -47,7 +47,7 @@ enum ServerResponse: Error {
     case unknownError
 }
 
-enum Result<Data, Error> {
-    case some(Data)
-    case error(Error)
+enum Result<A, ErrorType: Error> {
+    case success(A)
+    case error(ErrorType)
 }
