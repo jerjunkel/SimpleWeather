@@ -110,17 +110,25 @@ struct ForecastSlice: Forecastable {
     
     init(weather: [Weather]) {
         weatherArray = weather
+        updateModelsStore()
     }
     
     init(weather: Weather...) {
         weatherArray = weatherArray + weather
+        updateModelsStore()
     }
     
     mutating func add(weather: Weather) {
         weatherArray.append(weather)
+        updateModelsStore()
     }
     
     mutating func add(forecast: ForecastSlice) {
         weatherArray = weatherArray + forecast.weatherArray
+        updateModelsStore()
+    }
+    
+    private mutating func updateModelsStore() {
+        weatherModelsStore = weatherArray.map { WeatherViewModel(weather: $0) }
     }
 }
