@@ -39,7 +39,9 @@ struct Weather {
         case clouds = "Clouds"
         case unknown
     }
-    
+}
+
+extension Weather {
     init(weatherData: RawWeatherInfo) {
         date = weatherData.dt
         mainDescription = weatherData.weather.description
