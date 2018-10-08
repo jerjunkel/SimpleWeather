@@ -13,6 +13,7 @@ protocol Forecastable: Sequence where
     Element == Weather {
     
     var weatherArray: [Weather] { get set }
+    var weatherModelsStore: [WeatherViewModel] { get set }
     init (weather: [Weather])
 }
 
@@ -23,8 +24,16 @@ extension Forecastable {
         return weatherArray.makeIterator()
     }
     
-    var weatherModels: [WeatherViewModel] {
-        return weatherArray.map { WeatherViewModel(weather: $0) }
+    func getWeatherAllViewModels() -> [WeatherViewModel] {
+        return weatherModelsStore
+    }
+    
+    func getWeatherModel(at index: Int) -> WeatherViewModel? {
+        guard index < weatherModelsStore.count else {
+            return nil
+        }
+        
+        return weatherModelsStore[index]
     }
     
     var weatherObjects: [Weather] {
@@ -36,6 +45,7 @@ extension Forecastable {
 struct Forecast: Forecastable {
     var city: RawForecast.City?
     var weatherArray: [Weather] = []
+    var weatherModelsStore: [WeatherViewModel] = []
     
     init(weather: [Weather]) {
         self.weatherArray = weather
@@ -44,6 +54,7 @@ struct Forecast: Forecastable {
     init(forecastJson: RawForecast) {
         city = forecastJson.city
         makeWeatherObjects(from: forecastJson)
+        makeWeatherViewModels()
     }
     
     private mutating func makeWeatherObjects(from json: RawForecast) {
@@ -51,6 +62,10 @@ struct Forecast: Forecastable {
             let weatherObject = Weather(weatherData: weatherData)
             weatherArray.append(weatherObject)
         }
+    }
+    
+    private mutating func makeWeatherViewModels() {
+        weatherModelsStore = weatherArray.map { WeatherViewModel(weather: $0) }
     }
     
     func currentWeather() -> ForecastSlice {
@@ -90,6 +105,7 @@ struct Forecast: Forecastable {
 ///A slice of a Forecast instance.
 struct ForecastSlice: Forecastable {
     var weatherArray: [Weather] = []
+    var weatherModelsStore: [WeatherViewModel] = []
     var cityName: String?
     
     init(weather: [Weather]) {
