@@ -76,7 +76,7 @@ class CurrentWeatherViewController: UIViewController {
     
     private func updateCurrentWeatherInterface() {
         guard let forecast = forecast else { return }
-        guard let viewModel = forecast.currentWeather().weatherModels.first else { return }
+        guard let viewModel = forecast.getWeatherModel(at: 1) else { return }
         
         DispatchQueue.main.async {
             self.temperatureLabel.text = viewModel.currentTempFahrenheitString
@@ -90,7 +90,7 @@ class CurrentWeatherViewController: UIViewController {
     private func updateFutureForecastStack() {
         DispatchQueue.main.async {
             guard let forecast = self.forecast else { return }
-            let weatherModels = forecast.weatherModels
+            let weatherModels = forecast.getWeatherAllViewModels()
             let stackSubviews = self.weatherStack.arrangedSubviews.map { $0 as! LabeledWeatherView }
             
             for (index, view) in stackSubviews.enumerated() {
@@ -185,14 +185,14 @@ extension CurrentWeatherViewController: CurrentWeatherVCDelagate {
 extension CurrentWeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let forecast = forecast else { return 0}
-        return forecast.fiveDayForecast().weatherModels.count
+        return forecast.fiveDayForecast().getWeatherAllViewModels().count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCollectionViewCell.identifier, for: indexPath) as!
         WeatherCollectionViewCell
         
-        cell.weatherModel = forecast?.fiveDayForecast().weatherModels[indexPath.row]
+        cell.weatherModel = forecast?.fiveDayForecast().getWeatherModel(at: indexPath.row)
         return cell
     }
 }
