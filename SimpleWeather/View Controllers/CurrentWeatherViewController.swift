@@ -76,13 +76,13 @@ class CurrentWeatherViewController: UIViewController {
     
     private func updateCurrentWeatherInterface() {
         guard let forecast = forecast else { return }
-        guard let viewModel = forecast.getWeatherModel(at: 1) else { return }
+        guard let currentWeatherviewModel = forecast.getWeatherModel(at: 1) else { return }
         
         DispatchQueue.main.async {
-            self.temperatureLabel.text = viewModel.currentTempFahrenheitString
-            self.dateAndTimeLabel.text = viewModel.dateFormatted
+            self.temperatureLabel.text = currentWeatherviewModel.currentTempFahrenheitString
+            self.dateAndTimeLabel.text = currentWeatherviewModel.dateFormatted
             self.locationLabel.text = forecast.city?.name
-            self.currentWeatherConditionImageView.condition = viewModel.condition
+            self.currentWeatherConditionImageView.condition = currentWeatherviewModel.condition
             self.reloadCollectionView()
         }
     }
