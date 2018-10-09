@@ -79,7 +79,7 @@ class CurrentWeatherViewController: UIViewController {
         guard let currentWeatherviewModel = forecast.getWeatherModel(at: 1) else { return }
         
         DispatchQueue.main.async {
-            self.temperatureLabel.text = currentWeatherviewModel.currentTempFahrenheitString
+            self.temperatureLabel.text = currentWeatherviewModel.tempInCelsius
             self.dateAndTimeLabel.text = currentWeatherviewModel.dateFormatted
             self.locationLabel.text = forecast.city?.name
             self.currentWeatherConditionImageView.condition = currentWeatherviewModel.condition
