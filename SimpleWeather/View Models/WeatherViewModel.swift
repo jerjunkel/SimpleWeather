@@ -20,12 +20,12 @@ struct WeatherViewModel {
         return Date(timeIntervalSince1970: date)
     }
     
-    var currentTempCelsiusString: String {
+    var tempInCelsius: String {
         let temp = currentTemp + -273.15
         return "\(String(format: "%.2d", temp))°C"
     }
     
-    var currentTempFahrenheitString: String {
+    var tempInFahrenheit: String {
         let temp = (currentTemp * 9/5) - 459.67
         return "\(Int(temp))°F"
     }
