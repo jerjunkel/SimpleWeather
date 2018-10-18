@@ -10,7 +10,7 @@ import Foundation
 
 protocol Forecastable: Sequence where
     Iterator == IndexingIterator<[Element]>,
-Element == Weather {
+    Element == Weather {
     
     var weatherArray: [Weather] { get set }
     var weatherModelsStore: [WeatherViewModel] { get set }
