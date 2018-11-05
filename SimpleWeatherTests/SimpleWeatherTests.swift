@@ -11,26 +11,13 @@ import XCTest
 
 class SimpleWeatherTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testWeatherViewModelTempString() {
+        let testWeatherModel = Weather(date: 112244436, mainDescription: "kind of sunny", temperature: Temperature(current: 300, min: 0, max: 0), condition: .clouds)
+        
+        let weatherViewModel = WeatherViewModel(weather: testWeatherModel)
+        
+        XCTAssertEqual(weatherViewModel.tempInFahrenheit, "80°F")
+        XCTAssertEqual(weatherViewModel.tempInCelsius, "26.85°C")
     }
     
 }
