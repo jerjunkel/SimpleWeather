@@ -17,7 +17,7 @@ class SimpleWeatherTests: XCTestCase {
         let weatherViewModel = WeatherViewModel(weather: testWeatherModel)
         
         XCTAssertEqual(weatherViewModel.tempInFahrenheit, "80°F")
-        XCTAssertEqual(weatherViewModel.tempInCelsius, "26.85°C")
+        XCTAssertEqual(weatherViewModel.tempInCelsius, "26°C")
     }
     
 }

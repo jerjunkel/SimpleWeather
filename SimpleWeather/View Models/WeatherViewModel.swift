@@ -21,8 +21,8 @@ struct WeatherViewModel {
     }
     
     var tempInCelsius: String {
-        let temp = currentTemp + -273.15
-        return "\(String(format: "%.2d", temp))°C"
+        let temp = currentTemp - 273.15
+        return "\(Int(temp))°C"
     }
     
     var tempInFahrenheit: String {
