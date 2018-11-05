@@ -20,4 +20,14 @@ class SimpleWeatherTests: XCTestCase {
         XCTAssertEqual(weatherViewModel.tempInCelsius, "26°C")
     }
     
+    func testWeatherViewModelDateConversion() {
+        let testWeatherModel = Weather(date: 1541448123, mainDescription: "kind of sunny", temperature: Temperature(current: 300, min: 0, max: 0), condition: .clouds)
+        
+        let weatherViewModel = WeatherViewModel(weather: testWeatherModel)
+        
+        XCTAssertEqual(weatherViewModel.day, "Mon")
+        XCTAssertEqual(weatherViewModel.dateFormatted, "Nov 5, 2018")
+        XCTAssertEqual(weatherViewModel.time, "3:02 PM")
+    }
+    
 }
