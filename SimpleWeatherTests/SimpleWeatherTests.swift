@@ -30,4 +30,15 @@ class SimpleWeatherTests: XCTestCase {
         XCTAssertEqual(weatherViewModel.time, "3:02 PM")
     }
     
+    func testForecast() {
+        let weatherModels = (1...10).map { _ in
+            return Weather(date: 1541448123, mainDescription: "kind of sunny",
+                           temperature: Temperature(current: 300, min: 0, max: 0), condition: .clouds)
+        }
+        
+        let forecast = Forecast(weather: weatherModels)
+        
+        XCTAssertEqual(forecast.fiveHourForecast().weatherArray.count, 5)
+    }
+    
 }
