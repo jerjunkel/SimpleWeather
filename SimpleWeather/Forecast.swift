@@ -49,10 +49,14 @@ struct Forecast: Forecastable {
     
     func fiveDayForecast() -> ForecastSlice {
         var fiveDayweatherObjects: [Weather] = []
+        var weatherObjectCounter = 0
         
-        for index in stride(from: 0, to: 40, by: 8) {
-            fiveDayweatherObjects.append(weatherObjects[index])
+        for (index, weather) in weatherObjects.enumerated() where index % 8 == 0 {
+            guard weatherObjectCounter <= 5 else { break }
+            fiveDayweatherObjects.append(weather)
+            weatherObjectCounter += 1
         }
+        
         return ForecastSlice(weather: fiveDayweatherObjects)
     }
     
