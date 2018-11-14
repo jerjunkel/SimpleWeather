@@ -38,8 +38,8 @@ class SimpleWeatherTests: XCTestCase {
         
         let forecast = Forecast(weather: weatherModels)
         
-        XCTAssertEqual(forecast.fiveHourForecast().weatherArray.count, 5)
-        XCTAssertEqual(forecast.fiveDayForecast().weatherArray.count, 2)
+        XCTAssertEqual(forecast.fiveHourForecast().count, 5)
+        XCTAssertEqual(forecast.fiveDayForecast().count, 2)
     }
     
 }
