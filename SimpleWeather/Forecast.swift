@@ -64,12 +64,3 @@ struct Forecast: Forecastable {
         weatherArray.append(weather)
     }
 }
-
-//extension Forecast: ExpressibleByArrayLiteral {
-//    typealias ArrayLiteralElement = Element
-//
-//    init(arrayLiteral elements: Element...) {
-//        weatherArray += elements
-//    }
-//}
-
