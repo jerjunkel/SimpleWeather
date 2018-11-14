@@ -39,4 +39,8 @@ extension Forecastable {
     var weatherObjects: [Weather] {
         return weatherArray
     }
+    
+    var count: Int {
+        return weatherArray.count
+    }
 }
