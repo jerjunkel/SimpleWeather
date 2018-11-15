@@ -14,6 +14,7 @@ protocol CurrentWeatherVCDelagate: class {
 
 class CurrentWeatherViewController: UIViewController {
     private var forecast: Forecast?
+    private var fiveDayForecast: ForecastSlice?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -176,6 +177,7 @@ class CurrentWeatherViewController: UIViewController {
 extension CurrentWeatherViewController: CurrentWeatherVCDelagate {
     func updateChild(forecast: Forecast) {
         self.forecast = forecast
+        self.fiveDayForecast = forecast.fiveDayForecast()
         updateCurrentWeatherInterface()
         updateFutureForecastStack()
     }
@@ -192,7 +194,7 @@ extension CurrentWeatherViewController: UICollectionViewDelegate, UICollectionVi
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCollectionViewCell.identifier, for: indexPath) as!
         WeatherCollectionViewCell
         
-        cell.weatherModel = forecast?.fiveDayForecast().getWeatherModel(at: indexPath.row)
+        cell.weatherModel = fiveDayForecast?.getWeatherModel(at: indexPath.row)
         return cell
     }
 }
