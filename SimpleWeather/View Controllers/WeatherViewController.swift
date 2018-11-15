@@ -76,7 +76,7 @@ class WeatherViewController: UIViewController {
     }
 }
 
-//MARK: - Forecast Info
+//MARK: - Data Fetching and Handler Methods
 extension WeatherViewController {
     private func fetchWeatherJson() {
         guard let request = makeRequest() else { return }
