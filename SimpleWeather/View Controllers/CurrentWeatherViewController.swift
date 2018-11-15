@@ -186,8 +186,8 @@ extension CurrentWeatherViewController: CurrentWeatherVCDelagate {
 //MARK: - CollectionView Delegate Methods
 extension CurrentWeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let forecast = forecast else { return 0}
-        return forecast.fiveDayForecast().getWeatherAllViewModels().count
+        guard let fiveDayForecast = fiveDayForecast else { return 0 }
+        return fiveDayForecast.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
